@@ -10,31 +10,54 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static ru.yandex.praktikum.resources.Config.DEFAULT_WAIT_TIME;
+import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
-public class OrderPOM extends HeaderPOM {
+public class NewOrderPOM extends HeaderPOM {
     // Локаторы первой части заказа
+    private final By newOrderHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Для кого самокат')]");
     private final By firstNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Имя')]");
     private final By lastNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Фамилия')]");
-    private final By addressFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Адрес')]");;
+    private final By addressFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Адрес')]");
     private final By stationDropDownListLocator = By.xpath("//input[@class='select-search__input']");
     private final By phoneNumberFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Телефон')]");
     private final By nextButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
 
     // Локаторы второй части заказа
+    private final By newOrderSecondHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Про аренду')]");
     private final By rentalStartDateFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Когда')]");
     private final By rentalPeriodFieldLocator = By.xpath("//div[@class='Dropdown-control']");
     private final By makeOrderButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Заказать']");
     private final By returnButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Назад']");
 
     // Локаторы всплывающего окна подтверждения создания заказа
+    private final By popupHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Хотите оформить заказ?')]");
     private final By closePopupButtonLocator = By.xpath("//button[text()='Нет']");
     private final By confirmOrderButtonLocator = By.xpath("//button[text()='Да']");
 
-    // Локатор всплывающего окна оформленного заказа
+    // Локаторы всплывающего окна оформленного заказа
+    private final By orderFormedHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Заказ оформлен')]");
+    private final By orderIdTextLocator = By.xpath("//div[contains(@class, 'Order_Text__2broi')]");
     private final By viewStatusButtonLocator = By.xpath("//button[text()='Посмотреть статус']");
 
-    public OrderPOM(WebDriver driver) {
+    public NewOrderPOM(WebDriver driver) {
         super(driver);
+    }
+
+    public void isNewOrderPageLoaded(){
+        // Ждём загрузки заголовка страницы (для подтверждения того, что страница загружена)
+        new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
+                .until(ExpectedConditions.visibilityOfElementLocated(newOrderHeaderLocator));
+    }
+
+    public void openNewOrderPage(){
+        // Открываем в браузере домашнюю страницу
+        driver.get(ORDER_URL);
+
+        // Ждём загрузки заголовка страницы (для подтверждения того, что страница загружена)
+        isNewOrderPageLoaded();
+
+        // Нажимаем на кнопку согласия куки (чтобы не мешалась в firefox)
+        clickOnCookieButtonLocator();
     }
 
     public void setFirstName(String firstName){
@@ -85,6 +108,12 @@ public class OrderPOM extends HeaderPOM {
                 .click();
     }
 
+    public void isNewOrderSecondPageLoaded(){
+        // Ждём загрузки второй страницы создания заказа (для подтверждения того, что страница загружена)
+        new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
+                .until(ExpectedConditions.visibilityOfElementLocated(newOrderSecondHeaderLocator));
+    }
+
     public void setRentalStartDater (String date){
         new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
                 .until(ExpectedConditions.elementToBeClickable(rentalStartDateFieldLocator))
@@ -124,13 +153,40 @@ public class OrderPOM extends HeaderPOM {
                 .click();
     }
 
+    public void isPopupLoaded(){
+        // Ждём загрузки заголовка поп-апа (для подтверждения того, что страница загружена)
+        new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
+                .until(ExpectedConditions.visibilityOfElementLocated(popupHeaderLocator));
+    }
+
     public void clickOnConfirmOrderButton(){
+        //Проверяем, что находимся на шаге подтверждения заказа
+        isPopupLoaded();
+        //Нажимаем на кнопку "Да"
         new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
                 .until(ExpectedConditions.elementToBeClickable(confirmOrderButtonLocator))
                 .click();
     }
 
+    public void isOrderFormed(){
+        // Ждём загрузки заголовка всплывающего окна (для подтверждения того, что страница загружена)
+        new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
+                .until(ExpectedConditions.visibilityOfElementLocated(orderFormedHeaderLocator));
+    }
+
+    public String getOrderId(){
+        //Проверяем, что находимся в окне оформленного заказа
+        isOrderFormed();
+        // Выделяем номер заказа и возвращаем его
+        return driver.findElement(orderIdTextLocator).
+                getText().
+                split("\\D+")[1]; //разбиваем строку по нечисловым символам, возвращая массив ["", "422157", ...].
+    }
+
     public void clickOnviewStatusButton(){
+        //Проверяем, что находимся в окне оформленного заказа
+        isOrderFormed();
+        // Нажимаем на кнопку "Посмотреть статус"
         new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
                 .until(ExpectedConditions.elementToBeClickable(viewStatusButtonLocator))
                 .click();

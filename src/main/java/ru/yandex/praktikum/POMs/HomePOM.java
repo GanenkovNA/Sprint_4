@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
+import static ru.yandex.praktikum.resources.Config.BASE_URL;
 import static ru.yandex.praktikum.resources.Config.DEFAULT_WAIT_TIME;
 
 public class HomePOM extends HeaderPOM{
@@ -14,6 +15,23 @@ public class HomePOM extends HeaderPOM{
 
     public HomePOM(WebDriver driver) {
         super(driver);
+    }
+
+    public void isHomePageLoaded() {
+        // Ждём загрузки фона страницы (для подтверждения того, что страница загружена)
+        new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
+                .until(ExpectedConditions.visibilityOfElementLocated(backgroundImgLocator));
+    }
+
+    public void openHomePage(){
+        // Открываем в браузере домашнюю страницу
+        driver.get(BASE_URL);
+
+        // Ждём загрузки фона страницы (для подтверждения того, что страница загружена)
+        isHomePageLoaded();
+
+        // Нажимаем на кнопку согласия куки (чтобы не мешалась в firefox)
+        clickOnCookieButtonLocator();
     }
 
     public void clickOnFaqElement(int serial){

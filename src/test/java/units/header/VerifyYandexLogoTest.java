@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.praktikum.POMs.HeaderPOM;
+import ru.yandex.praktikum.POMs.HomePOM;
 import ru.yandex.praktikum.resources.DriverFactory;
 
 import java.time.Duration;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 import static ru.yandex.praktikum.resources.Config.*;
 
-public class VerifyYandexLogo {
+public class VerifyYandexLogoTest {
     WebDriver driver;
 
     @Before
@@ -23,8 +23,8 @@ public class VerifyYandexLogo {
     }
 
     @Test
-    public void checkYandexLogo() {
-        HeaderPOM headerObject = new HeaderPOM(driver);
+    public void VerifyYandexLogoTest() {
+        HomePOM headerObject = new HomePOM(driver);
         //Открываем домашнюю страницу
         headerObject.openHomePage();
         // Проверяем ссылку, содержащуюся в логотипе

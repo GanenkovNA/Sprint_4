@@ -6,18 +6,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.POMs.OrderPOM;
+import ru.yandex.praktikum.POMs.NewOrderPOM;
 import ru.yandex.praktikum.resources.DriverFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.assertEquals;
 import static ru.yandex.praktikum.resources.Config.BROWSER;
-import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
 @RunWith(Parameterized.class)
-public class NewOrder {
+public class NewOrderTest {
     WebDriver driver;
     // Переменные для первой части
     private final String firstName = "Скотт";
@@ -30,7 +28,7 @@ public class NewOrder {
     private final String rentalPeriod;
     private final String scooterColour;
 
-    public NewOrder(String rentalPeriod, String scooterColour) {
+    public NewOrderTest(String rentalPeriod, String scooterColour) {
         this.rentalPeriod = rentalPeriod;
         this.scooterColour = scooterColour;
     }
@@ -61,26 +59,40 @@ public class NewOrder {
     }
 
     @Test
-    public void orderCreation() {
-        OrderPOM orderObject = new OrderPOM(driver);
+    public void NewOrderTest() {
+        NewOrderPOM newOrderObject = new NewOrderPOM(driver);
         // Открываем домашнюю страницу
-        orderObject.openHomePage();
+        newOrderObject.openNewOrderPage();
+
+        /*
+        Отложено для другого теста
         // Нажимаем на кнопку "Заказать"
         orderObject.clickOnOrderButton();
         // Проверяем URL страницы, на которую перешли
         assertEquals(ORDER_URL, driver.getCurrentUrl());
+         */
+
         // Заполняем первую часть заказа
-        fillingOrderFields_1(orderObject);
+        fillingOrderFields_1(newOrderObject);
         // Нажимаем на кнопку "Далее"
-        orderObject.clickOnNextButton();
+        newOrderObject.clickOnNextButton();
+
+        //Проверяем, что вторая страница загрузилась
+        newOrderObject.isNewOrderSecondPageLoaded();
         //Заполняем вторую часть заказа
-        fillingOrderFields_2(orderObject);
+        fillingOrderFields_2(newOrderObject);
         //Нажимаем на кнопку "Заказать" под формой
-        orderObject.clickOnMakeOrderButton();
+        newOrderObject.clickOnMakeOrderButton();
+
         // Подтверждаем заказ в поп-апе ("Да")
-        orderObject.clickOnConfirmOrderButton();
+        newOrderObject.clickOnConfirmOrderButton();
+
+        //Проверяем, был ли создан заказ, и выводим его ID
+        System.out.println("ID заказа: " + newOrderObject.getOrderId());
+
         // Переходим на страницу просмотра статуса заказа
-        orderObject.clickOnviewStatusButton();
+        newOrderObject.clickOnviewStatusButton();
+
     }
 
     @After
@@ -88,18 +100,18 @@ public class NewOrder {
         driver.quit();
     }
 
-    private void fillingOrderFields_1(OrderPOM orderObject) {
-        orderObject.setFirstName(firstName);
-        orderObject.setLastName(lastName);
-        orderObject.setAddress(address);
-        orderObject.setStation(stationId);
-        orderObject.setPhoneNumber(phoneNumber);
+    private void fillingOrderFields_1(NewOrderPOM newOrderObject) {
+        newOrderObject.setFirstName(firstName);
+        newOrderObject.setLastName(lastName);
+        newOrderObject.setAddress(address);
+        newOrderObject.setStation(stationId);
+        newOrderObject.setPhoneNumber(phoneNumber);
     }
 
-    private void fillingOrderFields_2(OrderPOM orderObject) {
-        orderObject.setRentalStartDater(rentalStartDate);
-        orderObject.setRentalPeriod(rentalPeriod);
-        orderObject.setScooterColour(scooterColour);
+    private void fillingOrderFields_2(NewOrderPOM newOrderObject) {
+        newOrderObject.setRentalStartDater(rentalStartDate);
+        newOrderObject.setRentalPeriod(rentalPeriod);
+        newOrderObject.setScooterColour(scooterColour);
     }
 
     private String tomorrowDate() {

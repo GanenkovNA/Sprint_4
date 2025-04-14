@@ -1,4 +1,4 @@
-package units.homePage;
+package units.header;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static ru.yandex.praktikum.resources.Config.BROWSER;
 import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
-public class VerifyOrderButtonMiddle {
+public class VerifyOrderButtonHeaderTest {
     WebDriver driver;
 
     @Before
@@ -20,12 +20,12 @@ public class VerifyOrderButtonMiddle {
     }
 
     @Test
-    public void VerifyOrderButtonMiddleTest(){
+    public void VerifyOrderButtonHeaderTest(){
         HomePOM homeObject = new HomePOM(driver);
         // Открываем домашнюю страницу
         homeObject.openHomePage();
         // Нажимаем на кнопку "Заказать" в середине страницы
-        homeObject.clickOnOrderButtonMiddle();
+        homeObject.clickOnOrderButtonHeader();
         // Проверяем URL страницы, на которую перешли
         assertEquals(ORDER_URL, driver.getCurrentUrl());
     }
