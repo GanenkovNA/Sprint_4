@@ -23,7 +23,7 @@ public class VerifyYandexLogo {
     }
 
     @Test
-    public void checkYandexLogo() throws InterruptedException {
+    public void checkYandexLogo() {
         HeaderPOM headerObject = new HeaderPOM(driver);
         //Открываем домашнюю страницу
         headerObject.openHomePage();
