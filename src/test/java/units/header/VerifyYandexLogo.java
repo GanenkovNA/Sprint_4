@@ -42,7 +42,7 @@ public class VerifyYandexLogo {
                 break;
             }
         }
-        // Проверяем  URL новой вкладки
+        // Проверяем URL новой вкладки
         assertEquals(YANDEX_REDIRECT_URL, driver.getCurrentUrl());
     }
 

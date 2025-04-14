@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-import static ru.yandex.praktikum.resources.Config.BASE_URL;
 import static ru.yandex.praktikum.resources.Config.DEFAULT_WAIT_TIME;
 
 public class HomePOM extends HeaderPOM{
