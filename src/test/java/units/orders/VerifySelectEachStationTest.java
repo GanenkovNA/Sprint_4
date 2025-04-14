@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.POMs.OrderPOM;
+import ru.yandex.praktikum.POMs.NewOrderPOM;
 import ru.yandex.praktikum.resources.DriverFactory;
 
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import java.util.List;
 import static ru.yandex.praktikum.resources.Config.BROWSER;
 
 @RunWith(Parameterized.class)
-public class VerifySelectEachStation {
+public class VerifySelectEachStationTest {
     private final int stationId;
     WebDriver driver;
 
-    public VerifySelectEachStation(int stationId) {
+    public VerifySelectEachStationTest(int stationId) {
         this.stationId = stationId;
     }
 
@@ -43,13 +43,13 @@ public class VerifySelectEachStation {
 
     @Test
     public void checkStation() {
-        OrderPOM orderObject = new OrderPOM(driver);
+        NewOrderPOM newOrderObject = new NewOrderPOM(driver);
         // Открываем домашнюю страницу
-        orderObject.openHomePage();
+        newOrderObject.openNewOrderPage();
         // Нажимаем на кнопку "Заказать"
-        orderObject.clickOnOrderButton();
+        newOrderObject.clickOnOrderButtonHeader();
         //
-        orderObject.setStation(stationId);
+        newOrderObject.setStation(stationId);
     }
 
     @After

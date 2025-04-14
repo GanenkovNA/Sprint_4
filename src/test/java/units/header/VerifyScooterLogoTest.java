@@ -10,7 +10,7 @@ import ru.yandex.praktikum.resources.DriverFactory;
 import static org.junit.Assert.assertEquals;
 import static ru.yandex.praktikum.resources.Config.*;
 
-public class VerifyScooterLogo {
+public class VerifyScooterLogoTest {
     WebDriver driver;
 
     @Before
@@ -19,7 +19,7 @@ public class VerifyScooterLogo {
     }
 
     @Test
-    public void checkScooterLogo(){
+    public void VerifyScooterLogo(){
         HeaderPOM headerObject = new HeaderPOM(driver);
         // Открываем страницу заказа (чтобы перейти на домашнюю)
         driver.get(ORDER_URL);
