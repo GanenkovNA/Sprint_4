@@ -9,18 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) {
-
-        //Настройка браузера
-        WebDriver driver = DriverFactory.getDriver("chrome");
-        tomorrowDate();
-
-
-    }
-
-    private static void tomorrowDate(){
-        LocalDate tomorrow = LocalDate.now().plusDays(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String formattedDate = formatter.format(tomorrow);
-        System.out.println("Текущая дата (новый формат): " + formattedDate);
+        System.out.println("На этом мои полномочия всё");
     }
 }
