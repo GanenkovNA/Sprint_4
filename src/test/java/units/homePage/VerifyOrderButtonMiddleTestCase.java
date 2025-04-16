@@ -1,24 +1,13 @@
 package units.homePage;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.POMs.HomePOM;
-import ru.yandex.praktikum.resources.DriverFactory;
+import ru.yandex.praktikum.TestBase;
+import ru.yandex.praktikum.pom.HomePOM;
 
 import static org.junit.Assert.assertEquals;
-import static ru.yandex.praktikum.resources.Config.BROWSER;
 import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
-public class VerifyOrderButtonMiddleTest {
-    WebDriver driver;
-
-    @Before
-    public void startBrowser() {
-        driver = DriverFactory.getDriver(BROWSER);
-    }
-
+public class VerifyOrderButtonMiddleTestCase extends TestBase {
     @Test
     public void VerifyOrderButtonMiddleTest(){
         HomePOM homeObject = new HomePOM(driver);
@@ -28,10 +17,5 @@ public class VerifyOrderButtonMiddleTest {
         homeObject.clickOnOrderButtonMiddle();
         // Проверяем URL страницы, на которую перешли
         assertEquals(ORDER_URL, driver.getCurrentUrl());
-    }
-
-    @After
-    public void closeBrowser() {
-        driver.quit();
     }
 }

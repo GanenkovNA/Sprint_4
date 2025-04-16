@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.POMs;
+package ru.yandex.praktikum.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,30 +14,30 @@ import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
 public class NewOrderPOM extends HeaderPOM {
     // Локаторы первой части заказа
-    private final By newOrderHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Для кого самокат')]");
-    private final By firstNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Имя')]");
-    private final By lastNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Фамилия')]");
-    private final By addressFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Адрес')]");
-    private final By stationDropDownListLocator = By.xpath("//input[@class='select-search__input']");
-    private final By phoneNumberFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Телефон')]");
-    private final By nextButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
+    private static final By newOrderHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Для кого самокат')]");
+    private static final By firstNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Имя')]");
+    private static final By lastNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Фамилия')]");
+    private static final By addressFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Адрес')]");
+    private static final By stationDropDownListLocator = By.xpath("//input[@class='select-search__input']");
+    private static final By phoneNumberFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Телефон')]");
+    private static final By nextButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
 
     // Локаторы второй части заказа
-    private final By newOrderSecondHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Про аренду')]");
-    private final By rentalStartDateFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Когда')]");
-    private final By rentalPeriodFieldLocator = By.xpath("//div[@class='Dropdown-control']");
-    private final By makeOrderButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Заказать']");
-    private final By returnButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Назад']");
+    private static final By newOrderSecondHeaderLocator = By.xpath("//div[@class='Order_Header__BZXOb' and contains(text(), 'Про аренду')]");
+    private static final By rentalStartDateFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Когда')]");
+    private static final By rentalPeriodFieldLocator = By.xpath("//div[@class='Dropdown-control']");
+    private static final By makeOrderButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Заказать']");
+    private static final By returnButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM') and text()='Назад']");
 
     // Локаторы всплывающего окна подтверждения создания заказа
-    private final By popupHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Хотите оформить заказ?')]");
-    private final By closePopupButtonLocator = By.xpath("//button[text()='Нет']");
-    private final By confirmOrderButtonLocator = By.xpath("//button[text()='Да']");
+    private static final By popupHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Хотите оформить заказ?')]");
+    private static final By closePopupButtonLocator = By.xpath("//button[text()='Нет']");
+    private static final By confirmOrderButtonLocator = By.xpath("//button[text()='Да']");
 
     // Локаторы всплывающего окна оформленного заказа
-    private final By orderFormedHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Заказ оформлен')]");
-    private final By orderIdTextLocator = By.xpath("//div[contains(@class, 'Order_Text__2broi')]");
-    private final By viewStatusButtonLocator = By.xpath("//button[text()='Посмотреть статус']");
+    private static final By orderFormedHeaderLocator = By.xpath("//div[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Заказ оформлен')]");
+    private static final By orderIdTextLocator = By.xpath("//div[contains(@class, 'Order_Text__2broi')]");
+    private static final By viewStatusButtonLocator = By.xpath("//button[text()='Посмотреть статус']");
 
     public NewOrderPOM(WebDriver driver) {
         super(driver);
