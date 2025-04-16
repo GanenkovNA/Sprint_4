@@ -1,29 +1,23 @@
 package units.homePage;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.POMs.HomePOM;
-import ru.yandex.praktikum.resources.DriverFactory;
+import ru.yandex.praktikum.TestBase;
+import ru.yandex.praktikum.pom.HomePOM;
 
 import static org.junit.Assert.assertEquals;
-import static ru.yandex.praktikum.resources.Config.BROWSER;
 
 @RunWith(Parameterized.class)
-public class VerifyFaqAnswers {
+public class VerifyFaqAnswersTestCase extends TestBase {
     private final int serial;
     private final String answer;
-    WebDriver driver;
 
-    public VerifyFaqAnswers(int serial, String answer) {
+    public VerifyFaqAnswersTestCase(int serial, String answer) {
         this.serial = serial;
         this.answer = answer;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Ответ {0}: {1}")
     public static Object[][] answers() {
         return new Object[][]{
                 {0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
@@ -37,22 +31,12 @@ public class VerifyFaqAnswers {
         };
     }
 
-    @Before
-    public void startBrowser() {
-        driver = DriverFactory.getDriver(BROWSER);
-    }
-
     @Test
-    public void isAnswersCorrect() {
+    public void isAnswersCorrectTest() {
         HomePOM homeObject = new HomePOM(driver);
         //Открываем домашнюю страницу
         homeObject.openHomePage();
         //Сравниваем ответы на вопросы
         assertEquals(answer, homeObject.returnAnswerFromFaq(serial));
-    }
-
-    @After
-    public void closeBrowser() {
-        driver.quit();
     }
 }

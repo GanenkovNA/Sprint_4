@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.POMs;
+package ru.yandex.praktikum.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,20 +11,21 @@ import static ru.yandex.praktikum.resources.Config.DEFAULT_WAIT_TIME;
 
 public class HeaderPOM {
 
+    protected final WebDriver driver;
+
     // Локаторы логотипов
-    protected final By logoYandexLocator = By.xpath("//a[@class='Header_LogoYandex__3TSOI']");
-    protected final By logoScooterLocator = By.xpath("//a[@class='Header_LogoScooter__3lsAR']");
-    protected final By headerDisclaimerLocator = By.xpath("//div[@class='Header_Disclaimer__3VEni']");
+    protected static final By logoYandexLocator = By.xpath("//a[@class='Header_LogoYandex__3TSOI']");
+    protected static final By logoScooterLocator = By.xpath("//a[@class='Header_LogoScooter__3lsAR']");
+    protected static final By headerDisclaimerLocator = By.xpath("//div[@class='Header_Disclaimer__3VEni']");
     // Локаторы кнопок в шапке
-    protected final By orderButtonHeaderLocator = By.xpath("//button[@class='Button_Button__ra12g']");
-    protected final By orderStatusButtonLocator = By.xpath("//button[@class='Header_Link__1TAG7']");
-    protected final By cookieButtonLocator = By.xpath("//button[@class='App_CookieButton__3cvqF']");
+    protected static final By orderButtonHeaderLocator = By.xpath("//button[@class='Button_Button__ra12g']");
+    protected static final By orderStatusButtonLocator = By.xpath("//button[@class='Header_Link__1TAG7']");
+    protected static final By cookieButtonLocator = By.xpath("//button[@class='App_CookieButton__3cvqF']");
     // Локаторы элементов для проверки заказа
-    protected final By orderInputFieldLocator = By.xpath("//input[contains(@class, 'Header_Input__xIoUq')]");
-    protected final By checkOrderButtonLocator = By.xpath("//button[contains(@class, 'Header_Button__28dPO')]");
+    protected static final By orderInputFieldLocator = By.xpath("//input[contains(@class, 'Header_Input__xIoUq')]");
+    protected static final By checkOrderButtonLocator = By.xpath("//button[contains(@class, 'Header_Button__28dPO')]");
     // Локатор фонового изображения главной страницы
-    protected final By backgroundImgLocator = By.xpath("//img[@alt='Scooter blueprint']");
-    protected WebDriver driver;
+    protected static final By backgroundImgLocator = By.xpath("//img[@alt='Scooter blueprint']");
 
     public HeaderPOM(WebDriver driver) {
         this.driver = driver;

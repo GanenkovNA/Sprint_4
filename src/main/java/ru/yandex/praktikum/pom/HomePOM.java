@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.POMs;
+package ru.yandex.praktikum.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +11,8 @@ import static ru.yandex.praktikum.resources.Config.BASE_URL;
 import static ru.yandex.praktikum.resources.Config.DEFAULT_WAIT_TIME;
 
 public class HomePOM extends HeaderPOM{
-    private final By orderButtonMiddleLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
+    private static final By orderButtonMiddleLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
+    private static final String faqQuestionElementXpath = "//div[@id='accordion__heading-%d']";
 
     public HomePOM(WebDriver driver) {
         super(driver);
@@ -36,22 +37,22 @@ public class HomePOM extends HeaderPOM{
 
     public void clickOnFaqElement(int serial){
         // Находим вопрос в FAQ
-        By faqQuestionElement = By.xpath("//div[@id='accordion__heading-" + serial + "']");
+        By faqQuestionElementLocator = By.xpath(String.format(faqQuestionElementXpath, serial));
 
         // Прокручиваем страницу до вопроса
         ((JavascriptExecutor)driver)
-            .executeScript("arguments[0].scrollIntoView();", driver.findElement(faqQuestionElement));
+            .executeScript("arguments[0].scrollIntoView();", driver.findElement(faqQuestionElementLocator));
 
         // Ждём загрузки элемента с вопросом и нажимаем на него
         // Простой метод `.click()` периодически не срабатывает в firefox
         try {
             new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME))
-                    .until(ExpectedConditions.elementToBeClickable(faqQuestionElement))
+                    .until(ExpectedConditions.elementToBeClickable(faqQuestionElementLocator))
                     .click();
         } catch (Exception e) {
             ((JavascriptExecutor)driver).executeScript(
                     "arguments[0].click();",
-                    driver.findElement(faqQuestionElement)
+                    driver.findElement(faqQuestionElementLocator)
             );
         }
     }
