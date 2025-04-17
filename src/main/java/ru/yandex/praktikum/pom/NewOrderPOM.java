@@ -19,6 +19,7 @@ public class NewOrderPOM extends HeaderPOM {
     private static final By lastNameFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Фамилия')]");
     private static final By addressFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Адрес')]");
     private static final By stationDropDownListLocator = By.xpath("//input[@class='select-search__input']");
+    private static final String stationElementXpath = "//button[@value='%d']";
     private static final By phoneNumberFieldLocator = By.xpath("//input[contains(@class, 'Input_Input__1iN_Z') and contains(@placeholder, 'Телефон')]");
     private static final By nextButtonLocator = By.xpath("//button[contains(@class, 'Button_Middle__1CSJM')]");
 
@@ -84,7 +85,7 @@ public class NewOrderPOM extends HeaderPOM {
                 .until(ExpectedConditions.elementToBeClickable(stationDropDownListLocator))
                 .click();
 
-        By stationLocator = By.xpath("//button[@value='" + stationID + "']");
+        By stationLocator = By.xpath(String.format(stationElementXpath, stationID));
 
         // Прокручиваем список до нужной станции
         ((JavascriptExecutor)driver)
@@ -183,7 +184,7 @@ public class NewOrderPOM extends HeaderPOM {
                 split("\\D+")[1]; //разбиваем строку по нечисловым символам, возвращая массив ["", "422157", ...].
     }
 
-    public void clickOnviewStatusButton(){
+    public void clickOnViewStatusButton(){
         //Проверяем, что находимся в окне оформленного заказа
         isOrderFormed();
         // Нажимаем на кнопку "Посмотреть статус"

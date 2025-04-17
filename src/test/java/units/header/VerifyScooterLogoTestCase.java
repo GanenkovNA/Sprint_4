@@ -9,7 +9,7 @@ import static ru.yandex.praktikum.resources.Config.*;
 
 public class VerifyScooterLogoTestCase extends TestBase {
     @Test
-    public void VerifyScooterLogo(){
+    public void verifyScooterLogo(){
         NewOrderPOM newOrderPOM = new NewOrderPOM(driver);
         // Открываем страницу заказа (чтобы потом перейти на домашнюю с помощью кнопки)
         newOrderPOM.openNewOrderPage();
