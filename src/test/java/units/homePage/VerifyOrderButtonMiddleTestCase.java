@@ -9,7 +9,7 @@ import static ru.yandex.praktikum.resources.Config.ORDER_URL;
 
 public class VerifyOrderButtonMiddleTestCase extends TestBase {
     @Test
-    public void VerifyOrderButtonMiddleTest(){
+    public void verifyOrderButtonMiddleTest(){
         HomePOM homeObject = new HomePOM(driver);
         // Открываем домашнюю страницу
         homeObject.openHomePage();

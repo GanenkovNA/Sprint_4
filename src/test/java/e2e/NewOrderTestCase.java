@@ -50,7 +50,7 @@ public class NewOrderTestCase extends TestBase {
     }
 
     @Test
-    public void NewOrderTest() {
+    public void newOrderTest() {
         NewOrderPOM newOrderObject = new NewOrderPOM(driver);
         // Открываем домашнюю страницу
         newOrderObject.openNewOrderPage();
@@ -75,7 +75,7 @@ public class NewOrderTestCase extends TestBase {
         assertNotNull(orderID);
 
         // Переходим на страницу просмотра статуса заказа
-        newOrderObject.clickOnviewStatusButton();
+        newOrderObject.clickOnViewStatusButton();
     }
 
     private void fillingOrderFields_1(NewOrderPOM newOrderObject) {

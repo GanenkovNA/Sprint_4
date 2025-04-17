@@ -12,7 +12,7 @@ import static ru.yandex.praktikum.resources.Config.*;
 public class VerifyYandexLogoTestCase extends TestBase {
 
     @Test
-    public void VerifyYandexLogoTest() {
+    public void verifyYandexLogoTest() {
         HomePOM headerObject = new HomePOM(driver);
         //Открываем домашнюю страницу
         headerObject.openHomePage();
